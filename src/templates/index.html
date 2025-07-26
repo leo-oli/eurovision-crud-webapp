@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    {% for table in tables %}
+    <div class="feature col">
+        <h2>{{ table.name }}</h2>
+        <p>{{ table.desc }}</p>
+        <a href="{{ table.link }}" class="icon-link">
+            Open
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

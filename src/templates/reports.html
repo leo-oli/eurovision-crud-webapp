@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page">Reports</li>
+</ol>
+
+<ul>
+    <li>
+        <p><a href="#" title="Contract report">Contract report</a></p>
+        <p>Contract report for selected date range.</p>
+    </li>
+    <li>
+        <p><a href="#" title="Selected services report">Selected services report</a></p>
+        <p> Selected service report included into contracts for selected date range</p>
+    </li>
+    <li>
+        <p><a href="#" title="Late to return cars report">Late to return cars report</a></p>
+        <p>Late to return or unreturned car report.</p>
+    </li>
+</ul>
+
+{% endblock %}

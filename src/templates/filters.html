@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page">Filter Songs</li>
+</ol>
+
+<h2>Filter Songs</h2>
+<form method="POST" class="d-grid gap-3" action="{{ url_for('views.filtered_songs') }}">
+    <p class="required-note"><span class="text-danger">*</span> marked fields are required</p>
+    <div class="form-group">
+        <label for="start_date">Composition Date Start<span class="text-danger">*</span></label>
+        <input type="date" class="form-control" id="start_date" name="start_date" required>
+    </div>
+    <div class="form-group">
+        <label for="end_date">Composition Date End<span class="text-danger">*</span></label>
+        <input type="date" class="form-control" id="end_date" name="end_date" required>
+    </div>
+    <div class="form-group">
+        <label for="genre">Genre<span class="text-danger">*</span></label>
+        <select class="form-control" id="genre" name="genre" required>
+            {% for genre in genres %}
+            <option value="{{ genre }}">{{ genre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="choose_event_flag">
+        <label class="form-check-label" for="flexCheckDefault">
+            Choose an Event
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="event_id">Event<span class="text-danger">*</span></label>
+        <select class="form-control" id="event_id" name="event_id" required>
+            {% for event in events %}
+            <option value="{{ event.event_id }}">{{ event.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary w-25" name="button" value="Filter">
+</form>
+{% endblock %}

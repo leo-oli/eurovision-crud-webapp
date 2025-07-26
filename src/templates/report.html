@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/filters">Filter Songs</a></li>
+    <li class="breadcrumb-item" aria-current="page">Report</li>
+</ol>
+
+<ul>
+    <li>Composition year between: {{ inputs.get('start_date') }} and {{ inputs.get('end_date') }}</li>
+    <li>Genre: {{ inputs.get('genre') }}</li>
+    <li>Country ID: {{ inputs.get('country_id', 'Not specified') }}</li>
+</ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Song Title</th>
+            <th>Composition Date</th>
+            <th>Duration</th>
+            <th>Genre</th>
+            <th>Event Name</th>
+            <th>Language Country Name</th>
+            <th>Country Name</th>
+            <th>Language Name</th>
+            <th>Speaker Count</th>
+            <th>Percentage of Speakers in the Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in reports|groupby('song_title') %}
+        <tr class="table-secondary">
+            <td><strong>{{ song.grouper }}</strong></td>
+            <td>{{ song.list[0].composition_date }}</td>
+            <td>{{ song.list[0].duration }}</td>
+            <td>{{ song.list[0].genre }}</td>
+            <td>{% if song.list[0].event_name %} {{ song.list[0].event_name }} {% else %} The attribute is NULL {% endif
+                %}</td>
+            <td>{{ song.list[0].country_name }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% for language in song.list %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ language.language_country_name }}</td>
+            <td>{{ language.language_name }}</td>
+            <td>{{ language.speaker_count }}</td>
+            <td>{{ language.percentage_of_speakers }}</td>
+        </tr>
+        {% endfor %}
+        {% set aggregation = aggregations|selectattr('song_title', 'equalto', song.grouper)|list|first %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><strong>Group Total:</strong></td>
+            <td><em>Avg Length:</em><br><strong>{{ aggregation.avg_country_name_length }}</strong></td>
+            <td><em>Count:</em><br><strong>{{ aggregation.count_languages }}</strong></td>
+            <td><em>Sum:</em><br><strong>{{ aggregation.total_speaker_count }}</strong></td>
+            <td><em>Max:</em><br><strong>{{ aggregation.max_percentage_of_speakers }}</strong></td>
+        </tr>
+        {% endfor %}
+        <tr class="table-info">
+            <td><strong>Total:</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><em>Avg Length:</em><br><strong>{% if total.avg_country_name_length %} {{ total.avg_country_name_length
+                    }} {% else %} 0 {% endif %}</strong></td>
+            <td><em>Count:</em><br><strong>{{ total.count_languages }}</strong></td>
+            <td><em>Sum:</em><br><strong>{% if total.total_speaker_count %} {{ total.total_speaker_count }} {% else %} 0
+                    {% endif %}</strong></td>
+            <td><em>Max:</em><br><strong>{% if total.max_percentage_of_speakers != '%' %} {{
+                    total.max_percentage_of_speakers }} {% else %} 0% {% endif %}</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

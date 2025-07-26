@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "eurovision-website"
+version = "1.0.0"
+description = "A simple Flask+SQLite CRUD web app about Eurovision Song Contest"
+authors = ["Leonid Oliinyk <leo.oli.github.clubhouse326@simplelogin.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Flask = "^3.0.3"
+pydantic = "^2.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

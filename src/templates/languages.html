@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item" aria-current="page">Languages</li>
+</ol>
+
+{% if is_used_error %}
+<div class="alert alert-danger" role="alert">
+    Unable to delete. This record is used somewhere else.
+</div>
+{% endif %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Speaker Count</th>
+            <th>Language Family</th>
+            <th>Country</th>
+            <th>Remove</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for language in languages %}
+        <tr>
+            <td>{{ language.language_id }}</td>
+            <td>{{ language.name }}</td>
+            <td>{{ language.speaker_count }}</td>
+            <td>{{ language.language_family }}</td>
+            <td>{{ language.country_name }}</td>
+            <td>
+                <form action="{{ url_for('views.delete_language') }}" method="post"
+                    onsubmit="return confirm('Are you sure you want to delete this row?')">
+                    <input type="hidden" name="language_id" value="{{ language.language_id }}">
+                    <input type="submit" class="btn btn-outline-danger" value="Remove">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
