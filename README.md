@@ -14,8 +14,8 @@ This project was developed as part of a university database course.
   - [Usage](#usage)
     - [Using Docker](#using-docker)
     - [Using Poetry](#using-poetry)
-  - [Project Structure](#project-structure)
     - [Using Python Directly](#using-python-directly)
+  - [Project Structure](#project-structure)
   - [Contributing](#contributing)
   - [License](#license)
   - [Acknowledgments](#acknowledgments)
@@ -87,19 +87,6 @@ poetry run python -m src.app
 
 3. Open your web browser and navigate to <http://localhost:5000> to explore the Eurovision Song Contest database.
 
-## Project Structure
-
-- `db/`
-  - `dump.sql`: SQL dump file for the Eurovision Song Contest database
-- `src/`
-  - `app.py`: Flask app file
-  - `utils.py`: Some python utilities
-  - `templates/`: Jinja2 templates for the web app
-  - `models/`
-    - `model.py`: MVC model base class
-    - `db_tables.py`: Utility dataclasses
-    - Other MVC models
-
 ### Using Python Directly
 
 Alternatively, if you prefer using Python directly:
@@ -115,6 +102,19 @@ pip install -r requirements.txt
 ```bash
 python -m src.app
 ```
+
+## Project Structure
+
+- `db/`
+  - `dump.sql`: SQL dump file for the Eurovision Song Contest database
+- `src/`
+  - `app.py`: Flask app file
+  - `utils.py`: Some python utilities
+  - `templates/`: Jinja2 templates for the web app
+  - `models/`
+    - `model.py`: MVC model base class
+    - `db_tables.py`: Utility dataclasses
+    - Other MVC models
 
 ## Contributing
 
